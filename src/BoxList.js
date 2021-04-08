@@ -11,30 +11,28 @@ function BoxList() {
     // const oldBoxes = [...boxes];
     setBox((oldBoxes) => oldBoxes.filter(box => box.id !== id));
   }
-  function renderBoxes() {
-    return (
-      <ul>
-        {boxes.map(box => (
-          <li key={box.id}>
-            <Box {...box}/>
-          <button onClick={() => removeBox(box.id)}>Remove box</button>
-          </li>
-        ))}
-      </ul>
-    )
-  }
 
   function addBox(box){
     let newBox = {...box, id: uuid() };
     setBox(boxes => [...boxes, newBox]);
-    console.log(boxes)
-
   }
+
   //put renderboxes in return
   return (
     <div className="BoxList">
       <NewBoxForm addBox={addBox} />
-    {renderBoxes()};
+
+      <div className="BoxList-container">
+        {boxes.map(box => (
+          <div className="BoxList-box" key={box.id}>
+            <Box {...box}/>
+
+          <button className="BoxList-button" onClick={() => removeBox(box.id)}>Remove</button>
+
+          </div>
+        ))}
+      </div>
+
     </div>
 
   )
